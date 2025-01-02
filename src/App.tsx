@@ -47,13 +47,15 @@ function App() {
     
     return (
         <>
-            { state.isRunning 
-                ? <TimeDisplay state={state} />
-                : <TimePicker 
+            
+
+            {!state.isRunning 
+                ? <TimePicker 
                     state={state}
                     setPickedValue={setPickedValue}
                     setDisplayedValue={setDisplayedValue}
                 />
+                : <TimeDisplay state={state} />
             }
            
             <ClockControls 

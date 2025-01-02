@@ -9,7 +9,7 @@ export default function TimePicker(
         setDisplayedValue: (value: number) => void
     }
 ) {
-    const hms = numberToHMS(props.state.pickedValue)
+    const hms = numberToHMS(props.state.displayedValue)
     const [hours, setHours] = useState(hms.hours)
     const [minutes, setMinutes] = useState(hms.minutes)
     const [seconds, setSeconds] = useState(hms.seconds)
