@@ -9,10 +9,24 @@ export default function TimePicker(
         setDisplayedValue: (value: number) => void
     }
 ) {
-    const hms = numberToHMS(props.state.displayedValue)
+
+    const [previousDisplayedValue, setPreviousDisplayValue] = useState(props.state.displayedValue)
+
+    const hms = numberToHMS(previousDisplayedValue)
+
     const [hours, setHours] = useState(hms.hours)
     const [minutes, setMinutes] = useState(hms.minutes)
     const [seconds, setSeconds] = useState(hms.seconds)
+
+    if (previousDisplayedValue != props.state.displayedValue) {
+        setPreviousDisplayValue(props.state.displayedValue)
+
+        const hms = numberToHMS(props.state.displayedValue)
+
+        setHours(hms.hours)
+        setMinutes(hms.minutes)
+        setSeconds(hms.seconds)
+    }
 
     function handleChange(hours: number, minutes: number, seconds: number) {    
         props.setPickedValue(hours * 1000 * 60 * 60 + minutes * 1000 * 60 + seconds * 1000)    

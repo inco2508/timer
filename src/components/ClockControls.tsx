@@ -36,10 +36,13 @@ export default function ClockControls(
             <button 
                 onClick={() => {
                     props.setDisplayedValue(props.state.pickedValue)
-                    clearInterval(intervalRef.current)
-                    intervalRef.current = setInterval(() => {
-                        props.tickDisplayedValue()
-                    }, 1000)
+                    
+                    if (props.state.isRunning) {
+                        clearInterval(intervalRef.current)
+                        intervalRef.current = setInterval(() => {
+                            props.tickDisplayedValue()
+                        }, 1000)
+                    } 
                 }}
             >reset</button>
         </section>

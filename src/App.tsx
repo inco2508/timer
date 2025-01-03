@@ -47,8 +47,6 @@ function App() {
     
     return (
         <>
-            
-
             {!state.isRunning 
                 ? <TimePicker 
                     state={state}
