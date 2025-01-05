@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { ClockState } from "../App";
+import { ClockState } from "./Clock";
 
 
 export default function ClockControls(

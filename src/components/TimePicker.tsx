@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react"
 import { numberToHMS } from "../utils/utils"
-import { ClockState } from "../App"
+import { ClockState } from "./Clock"
+
 
 export default function TimePicker(
     props: {
@@ -9,7 +10,6 @@ export default function TimePicker(
         setDisplayedValue: (value: number) => void
     }
 ) {
-
     const [previousDisplayedValue, setPreviousDisplayValue] = useState(props.state.displayedValue)
 
     const hms = numberToHMS(previousDisplayedValue)
@@ -56,11 +56,15 @@ export default function TimePicker(
                 onChange={handleHoursChange}
             />
 
+            :
+
             <input 
                 type="number"
                 value={minutes}
                 onChange={handleMinutesChange}
             />
+
+            :
 
             <input 
                 type="number"
