@@ -8,6 +8,8 @@ export default function TimeDisplay(
     }
 ) {
     return (
-        <h1>{formatValue(props.state.displayedValue)}</h1>
+        <section>
+            <p>{formatValue(props.state.displayedValue)}</p>
+        </section>
     )
 }
