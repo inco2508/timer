@@ -54,6 +54,8 @@ export default function TimePicker(
 
     return (
         <section>
+            { props.state.displayedValue < 0 ? "-" : "" }
+
             <input 
                 type="number"
                 value={hours}

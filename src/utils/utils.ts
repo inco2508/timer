@@ -1,6 +1,12 @@
 export function formatValue(value: number): string {
+    let isNegative = false
+    if (value < 0) {
+        isNegative = true
+        value *= -1
+    }
+
     const hoursMs = value
-    const hoursS = Math.floor(hoursMs / (1000 * 60 * 60))
+    const hoursS = Math.floor(hoursMs / (1000 * 60 * 60))    
 
     const minutesMs = hoursMs - (hoursS * 1000 * 60 * 60)         
     const minutesS = Math.floor(minutesMs / (1000 * 60))
@@ -8,7 +14,7 @@ export function formatValue(value: number): string {
     const secondsMs = (minutesMs - (minutesS * 1000 * 60)) 
     const secondsS = Math.floor(secondsMs / (1000))
 
-    return `${hoursS >= 10 ? hoursS : "0" + hoursS}:${minutesS >= 10 ? minutesS : "0" + minutesS }:${secondsS >= 10 ? secondsS : "0" + secondsS}`
+    return `${isNegative ? "-" : ""}${hoursS >= 10 ? hoursS : "0" + hoursS}:${minutesS >= 10 ? minutesS : "0" + minutesS }:${secondsS >= 10 ? secondsS : "0" + secondsS}`
 }
 
 export function stringToNumberValue(value: string): number {
@@ -37,7 +43,13 @@ export function numberToStringValue(value: number): string {
     return `${hoursS >= 10 ? hoursS : "0" + hoursS}:${minutesS >= 10 ? minutesS : "0" + minutesS }:${secondsS >= 10 ? secondsS : "0" + secondsS}`
 }
 
-export function numberToHMS(value: number): { hours: number, minutes: number, seconds: number } {
+export function numberToHMS(value: number): { isNegative: boolean, hours: number, minutes: number, seconds: number } {
+    let isNegative = false
+    if (value < 0) {
+        isNegative = true
+        value *= -1
+    }
+
     const hoursMs = value
     const hoursS = Math.floor(hoursMs / (1000 * 60 * 60))
 
@@ -48,6 +60,7 @@ export function numberToHMS(value: number): { hours: number, minutes: number, se
     const secondsS = Math.floor(secondsMs / (1000))
 
     return {
+        isNegative: isNegative,
         hours: hoursS,
         minutes: minutesS,
         seconds: secondsS

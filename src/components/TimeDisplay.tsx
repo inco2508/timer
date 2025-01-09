@@ -6,7 +6,7 @@ export default function TimeDisplay(
     props: {
         state: ClockState
     }
-) {
+) {    
     return (
         <section>
             <p>{formatValue(props.state.displayedValue)}</p>
