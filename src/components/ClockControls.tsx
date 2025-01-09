@@ -11,7 +11,36 @@ export default function ClockControls(
     }
 ) {
     const intervalRef = useRef(0)
+    const audioContextRef = useRef<AudioContext | null>(null)
 
+    function beep() {
+        return new Promise<void>((resolve) => {
+            if (audioContextRef.current) {
+                const gain = new GainNode(audioContextRef.current);
+                gain.connect(audioContextRef.current.destination);
+                gain.gain.value = 0.1;
+        
+                const oscillator = new OscillatorNode(audioContextRef.current);
+                oscillator.connect(gain);
+                oscillator.frequency.value = 1000;
+    
+                oscillator.start();  
+                setTimeout(() => {
+                    oscillator.stop()
+                    resolve()
+                }, 50) 
+            }
+        })         
+    }
+
+    if (props.state.displayedValue === 0) {
+        (async () => {
+            await beep()
+            await new Promise(resolve => setTimeout(resolve, 75))
+            await beep()
+        })()
+    }
+    
     return (
         <section>
             <button 
@@ -22,6 +51,10 @@ export default function ClockControls(
                     intervalRef.current = setInterval(() => {
                         props.tickDisplayedValue()
                     }, 1000)
+
+                    audioContextRef.current = new AudioContext();
+    
+               
                 }}
             >start</button>
 
