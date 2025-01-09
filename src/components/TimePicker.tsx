@@ -39,13 +39,17 @@ export default function TimePicker(
     }
 
     function handleMinutesChange(e: ChangeEvent<HTMLInputElement>) {
-        setMinutes(+e.target.value)
-        handleChange(hours, +e.target.value, seconds)
+        const value = +e.target.value < 60 ? +e.target.value : 59
+        setMinutes(value)
+        handleChange(hours, value, seconds)
     }
 
     function handleSecondsChange(e: ChangeEvent<HTMLInputElement>) {
-        setSeconds(+e.target.value)
-        handleChange(hours, minutes, +e.target.value)
+        const value = +e.target.value < 60 ? +e.target.value : 59
+        console.log(value);
+        
+        setSeconds(value)
+        handleChange(hours, minutes, value)
     }
 
     return (
